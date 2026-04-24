@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #020617, #000000);
+    color: #ffffff;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #020617;
+    padding: 15px 30px;
+    border-bottom: 2px solid #ff3c3c;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #ff3c3c;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: #ff3c3c;
+}
+
+.welcome {
+    color: #ccc;
+}
+
+/* Buttons */
+.btn-nav {
+    background: #ff3c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-nav:hover {
+    background: #e62e2e;
+}
+
+/* Logout Form */
+.logout-form {
+    display: inline;
+    margin: 0;
+}
+
+/* Main Content */
+.main-content {
+    padding: 40px;
+    min-height: 80vh;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: #020617;
+    border-top: 1px solid #1e293b;
+}
+
+/* Messages */
+.messages {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.alert {
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+}
+
+.alert.success { background: #28a745; }
+.alert.error { background: #dc3545; }
+.alert.warning { background: #ffc107; color: black; }
+.alert.info { background: #17a2b8; }
+
+/* Back button (merged clean version) */
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 10px 14px;
+    background: rgba(31, 41, 55, 0.8);
+    color: #e5e7eb;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #374151;
+    transform: translateX(-3px);
+    color: white;
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+}
+
+/* Card (Netflix-style glass effect) */
+.card {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+}

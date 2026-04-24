@@ -1,0 +1,56 @@
+{% extends "games/base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <h2>🔐 Login</h2>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p>
+    Don’t have an account?
+    <a href="{% url 'signup' %}">Sign up</a>
+  </p>
+</div>
+
+<style>
+.container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 25px;
+  background: #2f2f4f;
+  border-radius: 12px;
+  color: white;
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: #6c5ce7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4834d4;
+}
+</style>
+
+{% endblock %}

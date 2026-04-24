@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+        .login-box {
+            background: #222;
+            padding: 30px;
+            width: 300px;
+            margin: 100px auto;
+            border-radius: 10px;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background: orange;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+        a {
+            color: orange;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+{% if user.is_authenticated %}
+
+    <p>Welcome {{ user.username }}</p>
+
+    <!-- 🎮 ACCESS CONTROL -->
+    {% if user.subscription and user.subscription.is_valid %}
+        <a href="{% url 'home' %}">▶️ Go to Games</a>
+    {% else %}
+        <a href="{% url 'subscribe' %}">💳 Subscribe to Play</a>
+    {% endif %}
+
+    <br><br>
+
+    <!-- 🔓 LOGOUT -->
+    <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+{% else %}
+
+    <div class="login-box">
+        <h2>🔐 Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+
+        <br>
+        <p>Don’t have an account?</p>
+        <a href="{% url 'signup' %}">Create one</a>
+
+        <br><br>
+        <a href="{% url 'home' %}">⬅ Back to Home</a>
+    </div>
+
+{% endif %}
+
+</body>
+</html>

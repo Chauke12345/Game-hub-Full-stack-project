@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}GameHub{% endblock %}</title>
+
+    <!-- CSS CONNECTION (THIS IS CORRECT) -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- Optional fonts (Netflix-style feel) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- NAVBAR (optional global) -->
+    <div class="navbar">
+        <div class="logo">🎮 GameHub</div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/games/">Games</a>
+        </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="main-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p>© 2026 GameHub - All Rights Reserved</p>
+    </div>
+
+</body>
+</html>

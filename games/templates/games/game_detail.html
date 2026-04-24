@@ -1,0 +1,171 @@
+{% extends "games/base.html" %}
+{% load static %}
+
+{% block title %}{{ game.title }} | GameHub{% endblock %}
+
+{% block content %}
+<style>
+  .game-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .game-card {
+    background: #1e1e2f;
+    color: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  }
+
+  .game-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin: 15px 0;
+  }
+
+  .desc {
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  .price {
+    font-size: 18px;
+    margin: 15px 0;
+  }
+
+  .actions {
+    margin-top: 20px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 18px;
+    margin: 8px 5px 0 0;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+
+  .btn-primary {
+    background: #6c5ce7;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #4834d4;
+  }
+
+  .btn-danger {
+    background: #ff3c3c;
+    color: white;
+  }
+
+  .btn-danger:hover {
+    background: #e62e2e;
+  }
+
+  .btn-secondary {
+    background: #444;
+    color: white;
+  }
+
+  .btn-secondary:hover {
+    background: #666;
+  }
+
+  .btn-success {
+    background: #28a745;
+    color: white;
+  }
+
+  .btn-success:hover {
+    background: #218838;
+  }
+
+  .btn-warning {
+    background: #f39c12;
+    color: white;
+  }
+
+  .btn-warning:hover {
+    background: #d68910;
+  }
+</style>
+
+<div class="game-container">
+  <div class="game-card">
+    <h1>{{ game.title }}</h1>
+
+    <p class="desc">{{ game.description }}</p>
+
+    {% if game.image %}
+      <img src="{{ game.image.url }}" alt="{{ game.title }}">
+    {% endif %}
+
+    {% if game.preview_video %}
+      <a class="btn btn-secondary" href="{{ game.preview_video }}" target="_blank">
+        ▶ Watch Preview
+      </a>
+    {% endif %}
+
+    <p class="price">
+      <strong>Price:</strong>
+      {% if game.price > 0 %}
+        ${{ game.price }}
+      {% else %}
+        Free
+      {% endif %}
+    </p>
+
+    <!-- 🔥 ACTION BUTTONS -->
+    <div class="actions">
+
+      {% if not user.is_authenticated %}
+        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-warning">
+          🔒 Login to Continue
+        </a>
+
+      {% elif owned %}
+        <button class="btn btn-success" disabled>
+          ✅ Owned
+        </button>
+
+        <a href="{% url 'play_online' game.id %}" class="btn btn-success">
+          ▶️ Play Now
+        </a>
+
+      {% elif game.price > 0 %}
+        <form method="POST" action="{% url 'purchase_game' game.id %}">
+          {% csrf_token %}
+          <button class="btn btn-danger">
+            🛒 Buy Now
+          </button>
+        </form>
+
+      {% elif not request.session.subscribed %}
+        <a href="{% url 'subscribe' %}" class="btn btn-primary">
+          💳 Subscribe to Play
+        </a>
+
+      {% else %}
+        <a href="{% url 'play_online' game.id %}" class="btn btn-success">
+          ▶️ Play Now
+        </a>
+
+      {% endif %}
+
+    </div>
+
+    <!-- ⬅ Back -->
+    <a href="{% url 'home' %}" class="btn btn-secondary">
+      ⬅ Back to Home
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}

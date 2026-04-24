@@ -1,0 +1,118 @@
+{% extends "games/base.html" %}
+
+{% block content %}
+
+<style>
+  body {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+  }
+
+  .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+  }
+
+  .signup-card {
+    position: relative;
+    background: #2f2f4f;
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    color: white;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: transparent;
+    border: none;
+    color: #a29bfe;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .back-btn:hover {
+    text-decoration: underline;
+    color: #fff;
+  }
+
+  .signup-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .signup-card input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+  }
+
+  .signup-card button {
+    width: 100%;
+    padding: 12px;
+    background: #6c5ce7;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .signup-card button:hover {
+    background: #4834d4;
+  }
+
+  .signup-card p {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .signup-card a {
+    color: #a29bfe;
+    text-decoration: none;
+  }
+
+  .signup-card a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="signup-container">
+  <div class="signup-card">
+
+    <!-- 🔙 Back Button -->
+    <a href="{% url 'home' %}" class="back-btn">⬅ Back</a>
+
+    <h2>🚀 Create Account</h2>
+
+    <!-- ✅ FIXED FORM (NO form.as_p) -->
+    <form method="POST">
+      {% csrf_token %}
+
+      <input type="text" name="username" placeholder="Username" required>
+
+      <input type="password" name="password" placeholder="Password" required>
+
+      <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>
+      Already have an account?
+      <a href="{% url 'login' %}">Login</a>
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}

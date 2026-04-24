@@ -1,0 +1,90 @@
+{% extends "games/base.html" %}
+{% block content %}
+
+<div class="container">
+    <h2>🛒 Purchase Game</h2>
+
+    <div class="game-info">
+        <h3>{{ game.title }}</h3>
+        <p>{{ game.description }}</p>
+        <strong>${{ game.price }}</strong>
+    </div>
+
+    <!-- ✅ If already owned -->
+    {% if user.is_authenticated and game.players.filter(id=user.id).exists %}
+        <button class="btn" disabled>✅ You already own this game</button>
+
+        <a href="{% url 'play_online' game.id %}" class="btn">
+            🎮 Play Now
+        </a>
+
+    {% else %}
+
+        <!-- 💳 Payment Form -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+
+            <button type="submit">Pay Now</button>
+        </form>
+
+    {% endif %}
+
+    <a class="back-link" href="{% url 'game_detail' game.id %}">
+        ⬅ Cancel
+    </a>
+</div>
+
+<style>
+.container {
+    background: #2f2f4f;
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    margin: 50px auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    text-align: center;
+    color: white;
+}
+
+body {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+}
+
+button, .btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #6c5ce7;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+button:hover, .btn:hover {
+    background: #4834d4;
+}
+
+.back-link {
+    display: block;
+    margin-top: 15px;
+    color: #bbb;
+    text-decoration: none;
+}
+</style>
+
+{% endblock %}

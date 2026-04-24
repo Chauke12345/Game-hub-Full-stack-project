@@ -1,0 +1,230 @@
+<<<<<<< HEAD
+{% extends "games/base.html" %}
+
+{% block content %}
+
+<div style="max-width:400px;margin:auto;text-align:center;padding:20px;">
+  <h2>💳 Fake Payment</h2>
+
+  <h3>{{ game.title }}</h3>
+  <p>Price: ${{ game.price }}</p>
+
+  <form method="POST">
+    {% csrf_token %}
+
+    <input type="text" placeholder="Card Number" required><br><br>
+    <input type="text" placeholder="Expiry (MM/YY)" required><br><br>
+    <input type="text" placeholder="CVV" required><br><br>
+
+    <button type="submit" class="btn purchase-btn">
+      Pay Now
+    </button>
+  </form>
+
+  <br>
+  <a href="{% url 'game_detail' game.id %}">Cancel</a>
+</div>
+
+{% endblock %}
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment | {{ game.title }}</title>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            min-height: 100vh;
+        }
+
+        .payment-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .payment-card {
+            display: flex;
+            width: 100%;
+            max-width: 750px;
+            background: #111827;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* LEFT */
+        .game-preview {
+            width: 40%;
+            background: #1f2937;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .game-preview img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .game-preview h3 {
+            color: white;
+            margin: 10px 0;
+        }
+
+        .price {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        /* RIGHT */
+        .payment-form {
+            width: 60%;
+            padding: 30px;
+            color: white;
+        }
+
+        .payment-form h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background: #1f2937;
+            color: white;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border: 1px solid #22c55e;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #22c55e, #4ade80);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* MOBILE FIX */
+        @media (max-width: 768px) {
+            .payment-card {
+                flex-direction: column;
+            }
+
+            .game-preview,
+            .payment-form {
+                width: 100%;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="payment-container">
+    <div class="payment-card">
+
+        <!-- LEFT SIDE -->
+        <div class="game-preview">
+            <img src="{{ game.image.url }}" alt="{{ game.title }}">
+            <h3>{{ game.title }}</h3>
+            <p class="price">${{ game.price }}</p>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="payment-form">
+            <h2>Secure Checkout</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="input-group">
+                    <label>Card Number</label>
+                    <input type="text" placeholder="1234 5678 9012 3456" required>
+                </div>
+                
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Expiry</label>
+                        <input type="text" placeholder="MM/YY" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>CVV</label>
+                        <input type="text" placeholder="123" required>
+                    </div>
+                </div>
+
+                <button type="submit">💳 Pay ${{ game.price }}</button>
+            </form>
+           <a href="{% url 'game_detail' game.id %}"
+   style="
+     position:absolute;
+     top:20px;
+     left:20px;
+     padding:10px 14px;
+     background:#1f2937;
+     color:white;
+     text-decoration:none;
+     border-radius:10px;
+     font-size:14px;
+     display:inline-block;
+   ">
+   ← Back to Game
+</a>
+</a>
+        </div>
+       
+
+    </div>
+</div>
+
+</body>
+</html>
+>>>>>>> abc9aba (Initial commit after fixing project)
